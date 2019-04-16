@@ -1,0 +1,24 @@
+swagger:
+  base:
+    package: com.institute.bi.tierc.user
+  api:
+    title: Baghant Institute User Service
+    description: Baghant Institute Tier-C User Service
+    version: '@project.version@'
+    termsOfServiceUrl: http://swagger.io
+    contact: bijendra.gupta@staples.com
+    license: Baghant
+    licenseUrl: https://en.wikipedia.org/wiki/Proprietary_software
+server:
+  port: 9089
+logging:
+  file: /var/opt/appworkr/logs/bi-tierc-user
+spring:
+  application:
+    name: spring-cloud-eureka-client
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:8761/eureka/
