@@ -6,7 +6,7 @@ swagger:
     description: Baghant Institute Tier-C User Service
     version: '@project.version@'
     termsOfServiceUrl: http://swagger.io
-    contact: bijendra.gupta@staples.com
+    contact: bijendrakrguptaitfiem@gmail.com
     license: Baghant
     licenseUrl: https://en.wikipedia.org/wiki/Proprietary_software
 server:
