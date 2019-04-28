@@ -5,6 +5,7 @@ package com.institute.bi.tierc.user.controller;
 
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.validation.Validator;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +17,6 @@ import org.springframework.web.context.request.async.DeferredResult;
 import com.institute.bi.domain.user.request.User;
 import com.institute.bi.tierc.user.client.BookServiceClient;
 import com.institute.bi.tierc.user.command.ValidateUserCommand;
-import com.institute.bi.tierc.user.exception.UserNotExistException;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -25,9 +25,14 @@ import io.swagger.annotations.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @author gupbi001
- *
+ * @author bijendra Here are a couple of ways of setting the active profile:
+ * 
+ *         At the time of launching the Java application
+ *         -Dspring.profiles.active=qa - in the VM properties, OR Do the
+ *         following in the application.properties file
+ *         spring.application.profiles=qa.
  */
+@Profile(value = { "prod" })
 @RestController
 @RequestMapping(value = "v1/baghantInstitute/user")
 @Slf4j
@@ -40,6 +45,7 @@ public class LogonController extends BaseController {
 	@Autowired
 	public LogonController(Map<String, Validator> validatorMap) {
 		super(validatorMap);
+		System.out.println(LogonController.class.getName());
 	}
 
 	@ApiOperation(value = "validateLogonDetails", notes = "Validate Logon Details")
