@@ -7,6 +7,9 @@
 
 package com.institute.bi.tierc.user.command;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.institute.bi.domain.user.request.User;
 import com.netflix.hystrix.HystrixCommand;
 import com.netflix.hystrix.HystrixCommandGroupKey;
@@ -16,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * 
- * @author gupbi001
+ * @author bijendra
  *
  * 
  * 
@@ -33,7 +36,10 @@ public class ValidateUserCommand extends HystrixCommand<User> {
 
 	@Override
 	protected User run() throws Exception {
-		return User.builder().emailId("bijendra.gupta@staples.com").password("abcd").build();
+		List<String> s=new ArrayList<>();
+		s.stream().filter(f->{return f.equals("");});
+		//.emailId("bijendrakrguptaitfiem@gmail.com").password("abcd").build();
+		return User.builder().emailId("bijendrakrguptaitfiem@gmail.com").password("abcd").build();
 	}
 
 	@Override

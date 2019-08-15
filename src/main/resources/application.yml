@@ -12,13 +12,33 @@ swagger:
 server:
   port: 9089
 logging:
-  file: /var/opt/appworkr/logs/bi-tierc-user
+  level:
+    org.springframework: ERROR
+    com.mkyong: DEBUG
+  pattern:
+    console: '%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n'
+    file: '%d %p %c{1.} [%t] %m%n'
+  file: app.log
 spring:
   application:
     name: spring-cloud-eureka-client
-eureka:
-  instance:
-    hostname: localhost
-  client:
-    service-url:
-      defaultZone: http://${eureka.instance.hostname}:8761/eureka/
+#eureka:
+#  instance:
+#   hostname: localhost
+#  client:
+#    service-url:
+#      defaultZone: http://${eureka.instance.hostname}:8765/eureka/
+database:
+  hibernate:
+    dialect: org.hibernate.dialect.MySQLDialect
+    showSql: true
+    formatSql: true
+    hbm2ddlAuto: update
+    secondLevelCache: true
+    cacheRegionFactoryClass: org.hibernate.cache.ehcache.EhCacheRegionFactory
+    queryCache: true
+  mysql:
+    driverClass: com.mysql.jdbc.Driver
+    jdbcUrl: jdbc:mysql://localhost:3306/baghant
+    userName: root
+    password: root

@@ -16,25 +16,14 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Configuration
 public class ErrorMessageConfig {
-//
 
-//            @Bean("exceptionErrorMessageSource")
-
-//            public MessageSource exceptionErrorMessageSource() {
-
-//
-
-//                            log.debug("Loading exception error messages properties file");
-
-//
-
-//                            ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-
-//                            messageSource.setBasename("classpath:exception_error_messages");
-
-//                            return messageSource;
-
-//            }
+	@Bean("exceptionErrorMessageSource")
+	public MessageSource exceptionErrorMessageSource() {
+		log.debug("Loading exception error messages properties file");
+		ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+		messageSource.setBasename("classpath:exception_error_messages");
+		return messageSource;
+	}
 
 	@Bean("validationErrorMessageSource")
 	public MessageSource validatoinErrorMessageSource() {

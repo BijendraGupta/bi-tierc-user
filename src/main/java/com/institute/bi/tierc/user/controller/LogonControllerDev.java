@@ -32,7 +32,7 @@ import lombok.extern.slf4j.Slf4j;
  * @author bijendra
  *
  */
-@Profile("qa")
+@Profile({"prod"})
 @RestController
 @RequestMapping(value = "v1/baghantInstitute/user")
 @Slf4j
@@ -54,15 +54,15 @@ public class LogonControllerDev extends BaseController {
 			@ApiResponse(code = 500, message = "Internal Server Error") })
 	@PostMapping("/login")
 	public DeferredResult<User> validateLogonDetails(@RequestBody User user) {
-		log.info("Validate Login Details, UserId: {} Name: {}, and password: {} ", user.getUserId(), user.getUserName(),
-				user.getPassword());
-		DeferredResult<User> deferredResult = new DeferredResult<>();
-		Validator validator = validatorMap.get("userValidator");
-		validate(validator, user, User.class);
-		User res = new ValidateUserCommand().execute();
-		String book = bookServiceClient.bookByIsbn(908);
-		res.setUserName(book);
-		deferredResult.setResult(res);
-		return deferredResult;
+//		log.info("Validate Login Details, UserId: {} Name: {}, and password: {} ", user.getUserId(), user.getUserName(),
+//				user.getPassword());
+//		DeferredResult<User> deferredResult = new DeferredResult<>();
+//		Validator validator = validatorMap.get("userRegistrationValidator");
+//		validate(validator, user, User.class);
+//		User res = new ValidateUserCommand().execute();
+//		String book = bookServiceClient.bookByIsbn(908);
+//		res.setUserName(book);
+//		deferredResult.setResult(res);
+		return null;
 	}
 }
