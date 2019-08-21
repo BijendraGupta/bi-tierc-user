@@ -17,6 +17,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -50,6 +51,16 @@ public class CoreControllerHandler {
 		this.exceptionErrorMessageSource = exceptionErrorMessageSource;
 	}
 
+	@ExceptionHandler(MethodArgumentNotValidException.class)
+	public ResponseEntity<ErrorResponse>
+	  handleMethodArgumentNotValidException( MethodArgumentNotValidException error ) {
+		log.debug("handleValidationException {}", error.getMessage());
+		ArrayList<ErrorItem> errorItemList = new ArrayList<ErrorItem>();
+		errorItemList.add(ErrorItem.builder().message(error.getMessage()).build());
+		ErrorResponse response = ErrorResponse.builder().erroritems(errorItemList).status(HttpStatus.NOT_FOUND.value())
+				.build();
+		return new ResponseEntity<ErrorResponse>(response, HttpStatus.BAD_REQUEST); // 400
+	}
 	/**
 	 * Handles required field validation from validators
 	 *

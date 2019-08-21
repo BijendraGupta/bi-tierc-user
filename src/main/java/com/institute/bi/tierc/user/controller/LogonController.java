@@ -5,6 +5,9 @@ package com.institute.bi.tierc.user.controller;
 
 import java.util.Arrays;
 import java.util.Map;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.validation.Validator;
@@ -86,5 +89,40 @@ public class LogonController extends BaseController {
 		User usr = logonService.doUserRegistration(user);
 		deferredResult.setResult(usr);
 		return deferredResult;
+	}
+	
+	@ApiOperation(value = "doRegister", notes = "To update user information")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Details Saved succesfully"),
+			@ApiResponse(code = 400, message = "Bad Input Params"), @ApiResponse(code = 404, message = "Not Found"),
+			@ApiResponse(code = 500, message = "Internal Server Error") })
+	@PostMapping("/updateRegistrationDetails")
+	public DeferredResult<User> updateRegistrationDetails(@RequestBody User user) {
+
+		log.info("updateRegistrationDetails UserId: {}, and password: {} ", user.getEmailId(),
+				user.getPassword().replaceAll("[\\s\\S]", "*"));
+		DeferredResult<User> deferredResult = new DeferredResult<>();
+		Validator validator = validatorMap.get("userUpdateRegistrationValidator");
+		validate(validator, user, User.class);
+
+		User usr = logonService.updateRegistrationDetails(user);
+		deferredResult.setResult(usr);
+		return deferredResult;
+	}
+	
+	@ApiOperation(value = "doRegister", notes = "To update user information")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Details Saved succesfully"),
+			@ApiResponse(code = 400, message = "Bad Input Params"), @ApiResponse(code = 404, message = "Not Found"),
+			@ApiResponse(code = 500, message = "Internal Server Error") })
+	@PostMapping("/test")
+	public User testing(@RequestBody @Valid User user) {
+
+//		log.info("updateRegistrationDetails UserId: {}, and password: {} ", user.getEmailId(),
+//				user.getPassword().replaceAll("[\\s\\S]", "*"));
+//		DeferredResult<User> deferredResult = new DeferredResult<>();
+//		Validator validator = validatorMap.get("userUpdateRegistrationValidator");
+//		validate(validator, user, User.class);
+
+		User usr = null;
+		return usr;
 	}
 }
